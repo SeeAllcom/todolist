@@ -1,0 +1,180 @@
+:root {
+  --ex-color-main: #1B84BF;
+  --ex-color-white: #ffffff;
+  --ex-color-black: #000000;
+  --ex-color-red: #BF1B1B;
+
+  --buttonAdd-bg: var(--ex-color-white);
+  --buttonAdd-color: var(--ex-color-black)
+}
+
+.c-todoList {
+  width: 100%;
+  max-width: 500px;
+  padding: 25px;
+  background: var(--ex-color-white);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 100px auto;
+
+  &Done {
+    width: 100%;
+    padding-left: 30px;
+
+    &__title {
+      color: var(--ex-color-main);
+      display: flex;
+      align-items: center;
+      padding: 5px 0;
+
+      .mat-icon {
+        margin-right: 8px;
+      }
+    }
+
+    &__item {
+      text-decoration: line-through;
+      font-size: 14px;
+      color: #7B7B7B;
+      margin-bottom: 8px;
+    }
+  }
+
+  &Form {
+    width: 100%;
+    padding-left: 75px;
+
+    &__list {
+      list-style: none;
+      margin-right: 20px;
+
+      &Delete {
+        margin-left: 8px;
+        color: var(--ex-color-red);
+        cursor: pointer;
+      }
+
+      &Checkbox {
+        margin-right: 8px;
+      }
+
+      &Item {
+        margin-bottom: 15px;
+        display: flex;
+      }
+    }
+  }
+
+  &__header {
+    margin-bottom: 40px;
+
+    &Title {
+      font-size: 24px;
+      color: #282828;
+      text-align: center;
+    }
+  }
+
+  &__btn {
+    width: 150px;
+    min-height: 40px;
+    border: 1px solid var(--ex-color-main);
+    color: var(--ex-color-main);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &:hover {
+      background: var(--ex-color-main);
+      color: var(--ex-color-white);
+    }
+
+    &--red {
+      border-color: var(--ex-color-red);
+      color: var(--ex-color-red);
+
+      &:hover {
+        background: var(--ex-color-red);
+      }
+    }
+  }
+
+  &Add {
+    &__btns {
+      display: flex;
+      align-items: center;
+      margin-left: -30px;
+      margin-top: 40px;
+
+      .c-todoList__btn {
+        margin-left: 30px;
+      }
+    }
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    &__input {
+      width: 268px;
+      height: 40px;
+      border-radius: 3px;
+      background: var(--ex-color-white);
+      border: 1px solid #D2D1D1;
+      padding: 0 17px;
+    }
+
+    &__field {
+      margin: 0 auto;
+      width: fit-content;
+    }
+  }
+
+  &__add {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    min-width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 1px solid var(--ex-color-main);
+    color: var(--buttonAdd-color);
+    margin-left: auto;
+    background: var(--buttonAdd-bg);
+    cursor: pointer;
+    box-shadow: -2px 0px 3px rgba(40, 40, 40, 0.18);
+
+    &:hover {
+      --buttonAdd-bg: var(--ex-color-main);
+      --buttonAdd-color: var(--ex-color-white)
+    }
+  }
+
+  &__error {
+    padding: 0 3px;
+    margin: 3px 0 5px;
+    font-size: 13px;
+    color: var(--ex-color-red);
+  }
+
+  &__title {
+    font-size: 18px;
+    color: #282828;
+    margin-bottom: 15px;
+  }
+}
+
+.mat-accordion {
+  margin-top: 24px;
+  border-top: 1px solid rgba(40, 40, 40, 0.18);
+}
+
+.mat-expansion-panel-header {
+  margin-bottom: 15px;
+}

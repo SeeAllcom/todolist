@@ -1,0 +1,60 @@
+<div class="c-todoList">
+  <div class="c-todoList__header">
+    <h1 class="c-todoList__headerTitle">Назва заголовка</h1>
+  </div>
+  <div class="c-todoList__content" *ngTemplateOutlet="this[currentState]"></div>
+</div>
+
+<ng-template #main>
+  <div style="display: flex; align-items: flex-end;">
+    <ng-container *ngIf="items.length">
+      <form [formGroup]="todoListItems" class="c-todoListForm">
+        <h2 class="c-todoList__title">Список карток</h2>
+        <ul class="c-todoListForm__list"
+            cdkDropList
+            [cdkDropListData]="todo"
+            (cdkDropListDropped)="drop($event)">
+          <li *ngFor="let item of items; let i = index" formArrayName="items" class="c-todoListForm__listItem">
+            <ng-container [formGroupName]="i">
+              <mat-checkbox class="c-todoListForm__listCheckbox" (click)="doneItem(item.controls.title.value); deleteItemToList(i)"></mat-checkbox>
+              <p class="c-todoListForm__listTitle">{{item.controls.title.value}}</p>
+              <mat-icon class="c-todoListForm__listDelete" (click)="openConfirmDeleteDialog(i)">close</mat-icon>
+            </ng-container>
+          </li>
+        </ul>
+      </form>
+    </ng-container>
+
+    <button class="c-todoList__add" (click)="changeTemplate(VIEW_STATE.AddNewItemTemplate)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <ng-container *ngIf="doneItems.length">
+    <mat-accordion>
+      <mat-expansion-panel hideToggle #faqPanelFirst>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <p class="c-todoListDone__title"><mat-icon>{{ faqPanelFirst.expanded ? 'expand_more' : 'chevron_right' }}</mat-icon> {{doneItems.length}} пунктів виконано</p>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul class="c-todoListDone">
+          <li class="c-todoListDone__item" *ngFor="let item of doneItems">{{item}}</li>
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </ng-container>
+</ng-template>
+
+<ng-template #addNewItemTemplate>
+  <form [formGroup]="addItemForm" class="c-todoListAdd__form">
+    <div class="c-todoListAdd__field">
+      <input type="text" placeholder="Введіть текст" class="c-todoListAdd__input" formControlName="item" required autofocus>
+      <p *ngIf="isFormInvalid && !addItemForm.controls.item.value?.length" class="c-todoList__error">Текст є обов'язковим</p>
+    </div>
+    <div class="c-todoListAdd__btns">
+      <button class="c-todoList__btn" (click)="addItemToLIst()" type="submit">Зберегти</button>
+      <button class="c-todoList__btn c-todoList__btn--red" (click)="changeTemplate(VIEW_STATE.Main)">Скасувати</button>
+    </div>
+  </form>
+</ng-template>
