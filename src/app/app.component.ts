@@ -1,4 +1,4 @@
-import { Component, Inject, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, OnInit, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { PersistState } from '@datorama/akita';
@@ -15,9 +15,9 @@ enum VIEW_STATE {
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent {
-  @ViewChild('main', { static: true }) main: TemplateRef<AppComponent>;
-  @ViewChild('addNewItemTemplate', { static: true }) addNewItemTemplate: TemplateRef<AppComponent>;
+export class AppComponent implements OnInit {
+  @ViewChild('main', {static: true}) main: TemplateRef<AppComponent>;
+  @ViewChild('addNewItemTemplate', {static: true}) addNewItemTemplate: TemplateRef<AppComponent>;
 
   readonly VIEW_STATE = VIEW_STATE;
   currentState: VIEW_STATE = VIEW_STATE.Main;
@@ -25,7 +25,7 @@ export class AppComponent {
     item: new FormControl('', [Validators.required]),
   });
   todoListItems = this.formBuilder.group({
-    items: this.formBuilder.array([ ])
+    items: this.formBuilder.array([])
   });
   listItems = this.todoListItems.controls.items as FormArray;
   items = this.todoListItems.get('items')['controls'];
@@ -35,8 +35,10 @@ export class AppComponent {
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
-    @Inject('persistStorage') private persistStorage: PersistState,
   ) {
+  }
+
+  ngOnInit(): void {
   }
 
   changeTemplate(state: VIEW_STATE): void {
