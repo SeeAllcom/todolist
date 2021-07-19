@@ -10,10 +10,7 @@
     <ng-container *ngIf="items.length">
       <form [formGroup]="todoListItems" class="c-todoListForm">
         <h2 class="c-todoList__title">Список карток</h2>
-        <ul class="c-todoListForm__list"
-            cdkDropList
-            [cdkDropListData]="todo"
-            (cdkDropListDropped)="drop($event)">
+        <ul class="c-todoListForm__list">
           <li *ngFor="let item of items; let i = index" formArrayName="items" class="c-todoListForm__listItem">
             <ng-container [formGroupName]="i">
               <mat-checkbox class="c-todoListForm__listCheckbox" (click)="doneItem(item.controls.title.value); deleteItemToList(i)"></mat-checkbox>
